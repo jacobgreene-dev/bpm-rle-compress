@@ -1,6 +1,6 @@
 # BPM-RLE-COMPRESSOR
 
-A simple command-line C++ application for compressing and decompressing 24-bit BMP images using Run-Length Encoding (RLE). This project demonstrates binary file I/O, image format handling, and lossless compression using modern C++.
+A simple command-line C++ application for compressing and decompressing BMP images using Run-Length Encoding (RLE). This project demonstrates binary file I/O, image format handling, and lossless compression using modern C++.
 
 ## Features
 
