@@ -28,7 +28,7 @@ This compiles all `.cpp` source files and creates `rlec.exe` in the root directo
 rlec.exe compress input.bmp output.rleimg
 ```
 
-- `input.bmp`: Path to a 24-bit uncompressed BMP file
+- `input.bmp`: Path to a uncompressed BMP file
 - `output.rleimg`: Destination path for the compressed image
 
 ### Decompress a Compressed Image
