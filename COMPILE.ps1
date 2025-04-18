@@ -1,6 +1,6 @@
 # COMPILE.ps1 - Script to compile the project
 
-$sourceFiles = @("main.cpp", "rle_compress.cpp", "rle_decompress.cpp")
+$sourceFiles = @("src/main.cpp", "src/rle_compress.cpp", "src/rle_decompress.cpp")
 $outputExecutable = "rlec.exe"
 
 # Compile

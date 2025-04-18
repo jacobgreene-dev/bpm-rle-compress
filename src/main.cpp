@@ -26,8 +26,8 @@ int main(int argc, char *argv[])
                   << "  --help, -h\n"
                   << "      Display this help message.\n\n"
                   << "Examples:\n"
-                  << "  " << argv[0] << " compress input.bmp output.rleimg\n"
-                  << "  " << argv[0] << " decompress input.rleimg output.bmp\n";
+                  << "  " << argv[0] << " compress ~/static/lena.bmp ~/static/output.rleimg\n"
+                  << "  " << argv[0] << " decompress ~/static/output.rleimg ~/static/new.bmp\n";
         return EXIT_SUCCESS;
     }
 
