@@ -2,20 +2,22 @@
 #include "rle_decompress.hh"
 #include <fstream>
 #include <iostream>
+#include <memory>
 #include <vector>
+#include <array>
 
 void decompressRLE(const std::string &inputRLE, const std::string &outputBMP)
 {
-    std::ifstream in(inputRLE, std::ios::binary);
-    if (!in)
+    auto in = std::make_unique<std::ifstream>(inputRLE, std::ios::binary);
+    if (!in->is_open())
     {
         std::cerr << "Error: Failed to open input RLE file: " << inputRLE << std::endl;
         return;
     }
 
-    unsigned char header[54];
-    in.read(reinterpret_cast<char *>(header), 54);
-    if (in.gcount() != 54)
+    std::array<unsigned char, 54> header;
+    in->read(reinterpret_cast<char *>(header.data()), header.size());
+    if (in->gcount() != header.size())
     {
         std::cerr << "Error: RLE file does not contain a valid BMP header." << std::endl;
         return;
@@ -23,11 +25,10 @@ void decompressRLE(const std::string &inputRLE, const std::string &outputBMP)
 
     std::vector<RLEPixel> compressed;
     RLEPixel entry;
-    while (in.read(reinterpret_cast<char *>(&entry), sizeof(RLEPixel)))
+    while (in->read(reinterpret_cast<char *>(&entry), sizeof(RLEPixel)))
     {
         compressed.push_back(entry);
     }
-    in.close();
 
     std::vector<unsigned char> pixels;
     for (const auto &p : compressed)
@@ -40,15 +41,14 @@ void decompressRLE(const std::string &inputRLE, const std::string &outputBMP)
         }
     }
 
-    std::ofstream out(outputBMP, std::ios::binary);
-    if (!out)
+    auto out = std::make_unique<std::ofstream>(outputBMP, std::ios::binary);
+    if (!out->is_open())
     {
         std::cerr << "Error: Failed to create output BMP file: " << outputBMP << std::endl;
         return;
     }
-    out.write(reinterpret_cast<char *>(header), 54);
-    out.write(reinterpret_cast<char *>(pixels.data()), pixels.size());
-    out.close();
+    out->write(reinterpret_cast<char *>(header.data()), header.size());
+    out->write(reinterpret_cast<char *>(pixels.data()), pixels.size());
 
     std::cout << "Decompression complete. Image written to: " << outputBMP << std::endl;
 }
