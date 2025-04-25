@@ -46,4 +46,9 @@ rlec.exe decompress output.rleimg restored.bmp
 rlec.exe --help
 ```
 
+### Upcoming changes - additions for png/jpg compression and decompression.
+```bash
+Possibility of adding png/jpg support
+```
+
 
